@@ -14,22 +14,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Core function to send tracking events (Fire & Forget)
     const logEvent = (eventType, inputLength) => {
-        let lengthBucket = 'small';
-        if (inputLength > 50) lengthBucket = 'medium';
-        if (inputLength > 200) lengthBucket = 'large';
+        try {
+            let lengthBucket = 'small';
+            if (typeof inputLength === 'number') {
+                if (inputLength > 50) lengthBucket = 'medium';
+                if (inputLength > 200) lengthBucket = 'large';
+            }
 
-        fetch('/api/event', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                event_type: eventType,
-                intent_category: currentIntentCategory,
-                intent_subtype: currentIntentSubtype,
-                intent_action: currentIntentAction,
-                input_length_bucket: lengthBucket,
-                timestamp: new Date().toISOString()
-            })
-        }).catch(e => console.error('Silent tracking error:', e));
+            fetch('/api/event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    event_type: eventType,
+                    intent_category: currentIntentCategory,
+                    intent_subtype: currentIntentSubtype,
+                    intent_action: currentIntentAction,
+                    input_length_bucket: lengthBucket,
+                    timestamp: new Date().toISOString()
+                })
+            }).catch(e => {
+                // Silently swallow network errors for analytics to preserve UI flow
+                console.warn('Anonymous tracking silently failed');
+            });
+        } catch (error) {
+            // General catch-all to ensure tracking never breaks the main app
+            console.warn('Tracking setup error');
+        }
     };
 
     // Handle Generation
