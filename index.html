@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Builder</title>
+    <meta name="description" content="Turn vague ideas into clear AI prompts.">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="header">
+        <h1>AI Prompt Builder</h1>
+        <p class="subtitle">Turn vague ideas into clear AI prompts.</p>
+    </header>
+
+    <main class="main-container">
+        
+        <!-- Input Section -->
+        <section class="input-section">
+            <label for="prompt-input" class="sr-only">What do you want to ask the AI?</label>
+            <textarea id="prompt-input" placeholder='Example: "Give me startup ideas"' rows="4"></textarea>
+            <div class="button-group">
+                <button id="generate-btn" class="primary-btn">Generate Prompt</button>
+            </div>
+            <p class="privacy-note">Your input is never saved. <a href="privacy.html">Privacy Policy</a></p>
+        </section>
+
+        <!-- Result Section (Hidden initially) -->
+        <section id="result-section" class="result-section hidden">
+            <div class="result-box">
+                <pre id="prompt-output"></pre>
+            </div>
+            <div class="action-buttons">
+                <button id="copy-btn" class="secondary-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    Copy Prompt
+                </button>
+                <button id="share-btn" class="social-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    Share on X
+                </button>
+            </div>
+        </section>
+
+        <!-- FAQ Section for SEO -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <h3>How to ask AI better questions</h3>
+                <p>Start with a clear role (e.g., "Act as an expert consultant"), define your goal specifically, add constraints like word count or format, and specify the final output format. Our tool handles this structure for you automatically.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is a prompt</h3>
+                <p>A prompt is the instruction or question you give to an Artificial Intelligence system. It guides the AI to understand what you need and how to respond.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Why AI answers are sometimes bad</h3>
+                <p>AI models lack mind-reading abilities. If a prompt is too brief or ambiguous, the AI guesses your intent, which often leads to generic or incorrect answers.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="terms.html">Terms</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+        <p>This tool is open-source and respects your privacy. We log basic anonymized stats to improve the service.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
