@@ -1,0 +1,23 @@
+{
+    "@context": "http://schema.org",
+    "@type": "HowTo",
+    "name": "How to generate a perfect AI prompt",
+    "description": "Learn how to turn a vague idea into a structured, highly effective AI prompt.",
+    "step": [
+        {
+            "@type": "HowToStep",
+            "name": "Enter your idea",
+            "text": "Type your vague idea into the AI Prompt Builder input box (e.g. 'Give me startup ideas')."
+        },
+        {
+            "@type": "HowToStep",
+            "name": "Generate Prompt",
+            "text": "Click the 'Generate Prompt' button to automatically structure your request into Role, Goal, Constraints, and Output format."
+        },
+        {
+            "@type": "HowToStep",
+            "name": "Copy to Clipboard",
+            "text": "Click the 'Copy Prompt' button to copy the structured prompt to your clipboard, ready to be pasted into ChatGPT, Claude, or any AI."
+        }
+    ]
+}

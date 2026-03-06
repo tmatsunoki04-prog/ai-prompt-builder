@@ -1,0 +1,30 @@
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "How to ask AI better questions?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Start with a clear role, define your goal specifically, add constraints like word count or format, and specify the final output format. Our tool handles this structure for you automatically."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What is a prompt?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A prompt is the instruction or question you give to an Artificial Intelligence system. It guides the AI to understand what you need and how to respond."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Why are AI answers sometimes bad?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "AI models lack mind-reading abilities. If a prompt is too brief or ambiguous, the AI guesses your intent, which often leads to generic or incorrect answers."
+            }
+        }
+    ]
+}
