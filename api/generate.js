@@ -1,41 +1,82 @@
 // This endpoint takes in the user's raw input and returns a structured AI prompt.
 // MVP Constraint: we do not save the input data anywhere.
+const { GoogleGenerativeAI } = require('@google/generative-ai');
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const { input } = req.body;
 
     if (!input || typeof input !== 'string') {
         return res.status(400).json({ error: 'Input is required' });
     }
 
-    // 1. Categorize (Simple keyword-based categorization for MVP)
-    let category = 'other';
-    const lowerInput = input.toLowerCase();
+    if (!process.env.GEMINI_API_KEY) {
+        return res.status(500).json({ error: 'GEMINI_API_KEY environment variable is missing.' });
+    }
 
-    if (lowerInput.match(/write|essay|blog|article/)) category = 'writing';
-    else if (lowerInput.match(/business|startup|idea|strategy/)) category = 'business';
-    else if (lowerInput.match(/study|learn|explain|physics|math/)) category = 'study';
-    else if (lowerInput.match(/code|program|script|debug/)) category = 'coding';
-    else if (lowerInput.match(/translate|language|japanese|english/)) category = 'translation';
+    // 2. Call AI API to structure the prompt
+    let aiResponseJson;
+    try {
+        const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+        // Using flash for low latency/cost
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-    // 2. Generate the structured prompt
-    // This uses a predefined template for the MVP to avoid expensive API calls to an LLM.
+        const systemInstruction = `You are a structural AI assistant that converts vague user inputs into structured fields.
+Output MUST be valid raw JSON only, without markdown formatting.
+
+Keys required:
+- "intent_summary": A very brief 1-sentence summary of the user's intention.
+- "goal": Rewrite the user's task into a clear, direct English statement.
+- "context": A description of the user's situation or background inferred from the input.
+- "missing_information": A JSON array of 3 to 5 strings, where each string is a question asking the user for additional information to improve their prompt. Example: ["Who is your target audience?", "What is your budget?"].
+- "intent_category": A broad category (snake_case/lower-case-hyphen) of the request. E.g. business, marketing, study, coding.
+- "intent_subtype": A sub-category (snake_case/lower-case-hyphen) of the request. E.g. education, youtube, web-development.
+- "intent_action": The specific action (snake_case/lower-case-hyphen). E.g. start_school, improve_thumbnail, debug_error.
+DO NOT quote raw user text into these three intent fields.`;
+
+        const result = await model.generateContent(`${systemInstruction}\n\nUser Input:\n${input}`);
+        let responseText = result.response.text().trim();
+
+        // Clean markdown JSON block if present
+        if (responseText.startsWith('\`\`\`json')) {
+            responseText = responseText.replace(/^\`\`\`json\s*/, '').replace(/\s*\`\`\`$/, '');
+        } else if (responseText.startsWith('\`\`\`')) {
+            responseText = responseText.replace(/^\`\`\`\s*/, '').replace(/\s*\`\`\`$/, '');
+        }
+
+        aiResponseJson = JSON.parse(responseText);
+    } catch (error) {
+        console.error("AI Generation Error:", error);
+        return res.status(500).json({ error: 'Failed to generate prompt structure from AI' });
+    }
+
+    // 3. Assemble the generated prompt template
     const generatedPrompt = `You are an expert consultant in the relevant field.
 
-Goal: ${input}
+Goal
+${aiResponseJson.goal}
 
-Constraints:
-1. Provide a highly actionable, structured answer.
-2. If necessary, outline assumptions you are making.
-3. Keep the language clear and concise.
+Context
+${aiResponseJson.context}
 
-Output format:
-Please provide the output using clear headings, bullet points, and actionable next steps.`;
+Constraints
+Provide a clear and structured answer.
+State assumptions when information is missing.
 
-    // 3. Return the result and category
+Output format
+1. Key explanation
+2. Practical steps
+3. Important considerations`;
+
+    // 4. Return the complete result
     // Data is safely returned without being persisted.
     res.json({
         prompt: generatedPrompt,
-        category: category
+        intent_category: aiResponseJson.intent_category || 'other',
+        intent_subtype: aiResponseJson.intent_subtype || 'other',
+        intent_action: aiResponseJson.intent_action || 'other',
+        intent_summary: aiResponseJson.intent_summary,
+        missing_information: aiResponseJson.missing_information,
+        goal: aiResponseJson.goal,
+        context: aiResponseJson.context
     });
 };

@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, '/')));
 
 // API Routes
 app.post('/api/generate', require('./api/generate'));
+app.post('/api/regenerate', require('./api/regenerate'));
 app.post('/api/event', require('./api/event'));
 
 // Fallback for SPA/Static Pages

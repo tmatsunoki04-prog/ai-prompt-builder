@@ -61,6 +61,7 @@ body {
     font-weight: 700;
     background: linear-gradient(90deg, #58a6ff, #bd93f9);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
 }
@@ -79,7 +80,7 @@ body {
     padding: 1.5rem;
     border-radius: var(--border-radius);
     border: 1px solid var(--border-color);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 textarea {
@@ -194,6 +195,67 @@ pre {
     color: #e6edf3;
 }
 
+.result-heading {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.result-heading:first-child {
+    margin-top: 0;
+}
+
+.summary-text {
+    color: var(--text-color);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.missing-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.missing-info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.missing-info-label {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.missing-info-input {
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.missing-info-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(88, 166, 255, 0.3);
+}
+
+.regenerate-group.hidden {
+    display: none;
+}
+
 .action-buttons {
     display: flex;
     gap: 1rem;
@@ -253,8 +315,15 @@ pre {
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @media (max-width: 600px) {

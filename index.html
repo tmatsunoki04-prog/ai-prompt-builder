@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <header class="header">
@@ -19,7 +21,7 @@
     </header>
 
     <main class="main-container">
-        
+
         <!-- Input Section -->
         <section class="input-section">
             <label for="prompt-input" class="sr-only">What do you want to ask the AI?</label>
@@ -33,16 +35,36 @@
         <!-- Result Section (Hidden initially) -->
         <section id="result-section" class="result-section hidden">
             <div class="result-box">
+                <h3 class="result-heading">Intent Summary</h3>
+                <p id="intent-summary-output" class="summary-text"></p>
+
+                <h3 class="result-heading">Missing Information <span
+                        style="font-size: 0.8rem; font-weight: 400; color: var(--text-muted);">(Optional to improve
+                        prompt)</span></h3>
+                <div id="missing-info-output" class="missing-info-container"></div>
+
+                <div class="button-group regenerate-group hidden" id="regenerate-group"
+                    style="margin-top: 1rem; margin-bottom: 2rem;">
+                    <button id="regenerate-btn" class="primary-btn">Regenerate Prompt</button>
+                </div>
+
+                <h3 class="result-heading" id="prompt-heading">Generated Prompt <span id="prompt-stage"
+                        style="font-size: 0.8rem; font-weight: 400; color: var(--text-muted);">(Initial)</span></h3>
                 <pre id="prompt-output"></pre>
             </div>
             <div class="action-buttons">
                 <button id="copy-btn" class="secondary-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
                     Copy Prompt
                 </button>
                 <button id="share-btn" class="social-btn">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                     </svg>
                     Share on X
                 </button>
@@ -52,20 +74,24 @@
         <!-- FAQ Section for SEO -->
         <section class="faq-section">
             <h2>Frequently Asked Questions</h2>
-            
+
             <div class="faq-item">
                 <h3>How to ask AI better questions</h3>
-                <p>Start with a clear role (e.g., "Act as an expert consultant"), define your goal specifically, add constraints like word count or format, and specify the final output format. Our tool handles this structure for you automatically.</p>
+                <p>Start with a clear role (e.g., "Act as an expert consultant"), define your goal specifically, add
+                    constraints like word count or format, and specify the final output format. Our tool handles this
+                    structure for you automatically.</p>
             </div>
 
             <div class="faq-item">
                 <h3>What is a prompt</h3>
-                <p>A prompt is the instruction or question you give to an Artificial Intelligence system. It guides the AI to understand what you need and how to respond.</p>
+                <p>A prompt is the instruction or question you give to an Artificial Intelligence system. It guides the
+                    AI to understand what you need and how to respond.</p>
             </div>
 
             <div class="faq-item">
                 <h3>Why AI answers are sometimes bad</h3>
-                <p>AI models lack mind-reading abilities. If a prompt is too brief or ambiguous, the AI guesses your intent, which often leads to generic or incorrect answers.</p>
+                <p>AI models lack mind-reading abilities. If a prompt is too brief or ambiguous, the AI guesses your
+                    intent, which often leads to generic or incorrect answers.</p>
             </div>
         </section>
 
@@ -81,4 +107,5 @@
 
     <script src="app.js"></script>
 </body>
+
 </html>

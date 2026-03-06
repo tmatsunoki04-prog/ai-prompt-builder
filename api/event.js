@@ -2,14 +2,14 @@
 // MVP Constraints: We MUST NOT log IP addresses, PII, or the raw input text.
 
 module.exports = (req, res) => {
-    const { event_type, category, input_length_bucket, prompt_features, timestamp } = req.body;
+    const { event_type, intent_category, intent_subtype, intent_action, input_length_bucket, timestamp } = req.body;
 
     if (!event_type) {
         return res.status(400).json({ error: 'event_type is required' });
     }
 
     // Allowable events
-    const validEvents = ['generate', 'copy', 'share'];
+    const validEvents = ['generate', 'copy', 'share', 'regenerate'];
     if (!validEvents.includes(event_type)) {
         return res.status(400).json({ error: 'Invalid event type' });
     }
@@ -18,9 +18,10 @@ module.exports = (req, res) => {
     // Notice that no IP address or input text is being included.
     const logEntry = {
         event_type,
-        category: category || 'unknown',
+        intent_category: intent_category || 'unknown',
+        intent_subtype: intent_subtype || 'unknown',
+        intent_action: intent_action || 'unknown',
         input_length_bucket: input_length_bucket || 'unknown',
-        prompt_features: prompt_features || {},
         timestamp: timestamp || new Date().toISOString()
     };
 

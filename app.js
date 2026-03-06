@@ -6,11 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copy-btn');
     const shareBtn = document.getElementById('share-btn');
 
-    let currentCategory = 'other';
+    let currentIntentCategory = 'unknown';
+    let currentIntentSubtype = 'unknown';
+    let currentIntentAction = 'unknown';
     let currentPromptStr = '';
+    let currentOriginalInput = '';
 
     // Core function to send tracking events (Fire & Forget)
-    const logEvent = (eventType, category, inputLength) => {
+    const logEvent = (eventType, inputLength) => {
         let lengthBucket = 'small';
         if (inputLength > 50) lengthBucket = 'medium';
         if (inputLength > 200) lengthBucket = 'large';
@@ -20,12 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 event_type: eventType,
-                category: category,
+                intent_category: currentIntentCategory,
+                intent_subtype: currentIntentSubtype,
+                intent_action: currentIntentAction,
                 input_length_bucket: lengthBucket,
-                prompt_features: {
-                    has_role: true,
-                    has_constraints: true
-                },
                 timestamp: new Date().toISOString()
             })
         }).catch(e => console.error('Silent tracking error:', e));
@@ -36,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const text = inputArea.value.trim();
         if (!text) return;
 
+        currentOriginalInput = text;
         generateBtn.disabled = true;
         generateBtn.textContent = 'Generating...';
 
@@ -49,23 +51,114 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 const data = await response.json();
                 currentPromptStr = data.prompt;
-                currentCategory = data.category;
+                currentIntentCategory = data.intent_category;
+                currentIntentSubtype = data.intent_subtype;
+                currentIntentAction = data.intent_action;
 
                 // Show result
+                document.getElementById('intent-summary-output').textContent = data.intent_summary;
+
+                const missingInfoContainer = document.getElementById('missing-info-output');
+                missingInfoContainer.innerHTML = ''; // clear previous
+
+                if (Array.isArray(data.missing_information) && data.missing_information.length > 0) {
+                    data.missing_information.forEach((question, index) => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.className = 'missing-info-item';
+
+                        const label = document.createElement('label');
+                        label.className = 'missing-info-label';
+                        label.textContent = `${index + 1}. ${question}`;
+
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = 'missing-info-input';
+                        input.dataset.question = question;
+                        input.placeholder = 'Your answer...';
+
+                        itemDiv.appendChild(label);
+                        itemDiv.appendChild(input);
+                        missingInfoContainer.appendChild(itemDiv);
+                    });
+                    document.getElementById('regenerate-group').classList.remove('hidden');
+                } else {
+                    missingInfoContainer.textContent = "No additional information requested.";
+                    document.getElementById('regenerate-group').classList.add('hidden');
+                }
+
+                document.getElementById('prompt-stage').textContent = '(Initial)';
+                document.getElementById('prompt-stage').style.color = 'var(--text-muted)';
                 promptOutput.textContent = currentPromptStr;
                 resultSection.classList.remove('hidden');
 
                 // Track Event
-                logEvent('generate', currentCategory, text.length);
+                logEvent('generate', text.length);
             } else {
-                alert('Generation failed, please try again.');
+                const data = await response.json();
+                alert(`Generation failed: ${data.error || response.statusText} (${response.status})`);
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred.');
+            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                alert('Network Error: The local server is not running or unreachable. Please run `node server.js` and try again.');
+            } else {
+                alert(`Application Error: ${error.message}`);
+            }
         } finally {
             generateBtn.disabled = false;
             generateBtn.textContent = 'Generate Prompt';
+        }
+    });
+
+    const regenerateBtn = document.getElementById('regenerate-btn');
+
+    regenerateBtn.addEventListener('click', async () => {
+        regenerateBtn.disabled = true;
+        regenerateBtn.textContent = 'Generating...';
+
+        try {
+            const inputs = document.querySelectorAll('.missing-info-input');
+            const answers = {};
+            inputs.forEach(input => {
+                if (input.value.trim() !== '') {
+                    answers[input.dataset.question] = input.value.trim();
+                }
+            });
+
+            const response = await fetch('/api/regenerate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    original_input: currentOriginalInput,
+                    answers: answers
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                currentPromptStr = data.generated_prompt;
+
+                // Show result
+                promptOutput.textContent = currentPromptStr;
+                document.getElementById('prompt-stage').textContent = '(Final)';
+                document.getElementById('prompt-stage').style.color = 'var(--success-color)';
+
+                // Track Event
+                logEvent('regenerate', 0);
+            } else {
+                const data = await response.json();
+                alert(`Regeneration failed: ${data.error || response.statusText} (${response.status})`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                alert('Network Error: The local server is not running or unreachable. Please run `node server.js` and try again.');
+            } else {
+                alert(`Application Error: ${error.message}`);
+            }
+        } finally {
+            regenerateBtn.disabled = false;
+            regenerateBtn.textContent = 'Regenerate Prompt';
         }
     });
 
@@ -83,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
 
             // Track Event
-            logEvent('copy', currentCategory, 0); // length is 0 since we only care about the action here
+            logEvent('copy', 0); // length is 0 since we only care about the action here
         } catch (err) {
             console.error('Failed to copy text: ', err);
             alert('Clipboard copy failed. Please select and copy manually.');
@@ -100,6 +193,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.open(xShareUrl, '_blank', 'noopener,noreferrer');
 
         // Track Event
-        logEvent('share', currentCategory, 0);
+        logEvent('share', 0);
     });
 });

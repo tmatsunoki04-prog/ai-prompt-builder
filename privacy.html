@@ -72,29 +72,27 @@
             </ul>
 
             <h2>2. Information We Do Collect (Anonymous Statistics)</h2>
+            <p>We collect limited anonymous analytics, including feature usage counts and AI-generated intent categories
+                such as general topic classification. We do not store raw user input, generated prompts, or personal
+                information.</p>
             <p>To understand how our tool is used and to improve it, we collect completely anonymous usage statistics.
                 This data cannot be traced back to you:</p>
             <ul>
-                <li><strong>Event Types:</strong> We log when an action occurs (e.g., "generate", "copy", "share").</li>
-                <li><strong>Broad Categories:</strong> We classify usage into broad, non-specific categories (e.g.,
-                    "writing", "business", "coding").</li>
+                <li><strong>Event Types:</strong> We log when an action occurs (e.g., "generate", "copy", "share",
+                    "regenerate").</li>
+                <li><strong>Abstract Intents:</strong> We classify usage into broad, non-specific category identifiers
+                    (e.g., intent_category: "business", intent_subtype: "finance", intent_action: "write_report").</li>
                 <li><strong>Input Length Buckets:</strong> We log the rough size of the request (e.g., "small",
                     "medium", "large") to optimize performance.</li>
                 <li><strong>Timestamps:</strong> We record the time an event occurred.</li>
             </ul>
-            <p>The tool collects limited anonymous usage statistics such as:</p>
-            <ul>
-                <li>generation events</li>
-                <li>copy button usage</li>
-                <li>share button usage</li>
-                <li>approximate input length buckets</li>
-            </ul>
-            <p>These statistics are used only to understand general usage patterns and improve the service. No personal
-                data or raw user input is stored.</p>
 
             <h2>3. Third-Party Services</h2>
             <p>We may use basic hosting and analytics providers to process the anonymous data mentioned above. These
-                providers are bound by strict data processing agreements.</p>
+                providers are bound by strict data processing agreements. Additionally, the tool utilizes third-party AI
+                providers (such as Google Gemini) to process your input and generate prompts. The AI provider
+                temporarily processes the raw text to structure it, but they are not permitted to use this data to train
+                their models under our API agreement.</p>
 
             <h2>4. Changes to this Policy</h2>
             <p>We may update our Privacy Policy occasionally. We will notify you of any changes by posting the new
