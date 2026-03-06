@@ -13,11 +13,9 @@ module.exports = async (req, res) => {
         return res.status(500).json({ error: 'GEMINI_API_KEY environment variable is missing.' });
     }
 
-    // 2. Call AI API to structure the prompt
     let aiResponseJson;
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        // Using flash for low latency/cost
         const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
         const systemInstruction = `You are a structural AI assistant that converts vague user inputs into structured fields.
@@ -36,7 +34,6 @@ DO NOT quote raw user text into these three intent fields.`;
         const result = await model.generateContent(`${systemInstruction}\n\nUser Input:\n${input}`);
         let responseText = result.response.text().trim();
 
-        // Clean markdown JSON block if present
         if (responseText.startsWith('\`\`\`json')) {
             responseText = responseText.replace(/^\`\`\`json\s*/, '').replace(/\s*\`\`\`$/, '');
         } else if (responseText.startsWith('\`\`\`')) {
@@ -49,7 +46,6 @@ DO NOT quote raw user text into these three intent fields.`;
         return res.status(500).json({ error: 'Failed to generate prompt structure from AI' });
     }
 
-    // 3. Assemble the generated prompt template
     const generatedPrompt = `You are an expert consultant in the relevant field.
 
 Goal
@@ -67,16 +63,12 @@ Output format
 2. Practical steps
 3. Important considerations`;
 
-    // 4. Sanitize intent fields to guarantee no raw text leaks
     const sanitizeIntent = (val) => {
         if (!val || typeof val !== 'string') return 'unknown';
-        // HTML/JS comment: lower-case化 → 許可文字以外除去 → 50文字で切り詰め → 空なら unknown
         const cleaned = val.toLowerCase().replace(/[^a-z0-9_-]/g, '').substring(0, 50);
         return cleaned === '' ? 'unknown' : cleaned;
     };
 
-    // 5. Return the complete result
-    // Data is safely returned without being persisted.
     res.json({
         prompt: generatedPrompt,
         intent_category: sanitizeIntent(aiResponseJson.intent_category),
