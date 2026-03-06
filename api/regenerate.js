@@ -47,10 +47,10 @@ Output format
         const result = await model.generateContent(`${systemInstruction}\n\n${promptText}`);
         let responseText = result.response.text().trim();
 
-        if (responseText.startsWith('\`\`\`json')) {
-            responseText = responseText.replace(/^\`\`\`json\s*/, '').replace(/\s*\`\`\`$/, '');
-        } else if (responseText.startsWith('\`\`\`')) {
-            responseText = responseText.replace(/^\`\`\`\s*/, '').replace(/\s*\`\`\`$/, '');
+        if (responseText.startsWith('```json')) {
+            responseText = responseText.replace(/^```json\s*/, '').replace(/\s*```$/, '');
+        } else if (responseText.startsWith('```')) {
+            responseText = responseText.replace(/^```\s*/, '').replace(/\s*```$/, '');
         }
 
         const aiResponseJson = JSON.parse(responseText);
@@ -61,7 +61,7 @@ Output format
             return cleaned === '' ? 'unknown' : cleaned;
         };
 
-        // Note: We deliberately DO NOT log original_input or answers.
+        // Note: original_input and answers are intentionally NOT saved and NOT output to console.
         res.json({
             generated_prompt: aiResponseJson.generated_prompt,
             intent_category: sanitizeIntent(req.body.intent_category),
