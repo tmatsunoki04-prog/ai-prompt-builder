@@ -14,15 +14,18 @@ module.exports = (req, res) => {
         return res.status(400).json({ error: 'Invalid event type' });
     }
 
+    // Sanitize values to prevent large payload injections (max 50 chars)
+    const sanitizeVal = (val) => (typeof val === 'string' ? val.substring(0, 50) : 'unknown');
+
     // Create the anonymous log object
     // Notice that no IP address or input text is being included.
     const logEntry = {
         event_type,
-        intent_category: intent_category || 'unknown',
-        intent_subtype: intent_subtype || 'unknown',
-        intent_action: intent_action || 'unknown',
-        input_length_bucket: input_length_bucket || 'unknown',
-        timestamp: timestamp || new Date().toISOString()
+        intent_category: sanitizeVal(intent_category),
+        intent_subtype: sanitizeVal(intent_subtype),
+        intent_action: sanitizeVal(intent_action),
+        input_length_bucket: sanitizeVal(input_length_bucket),
+        timestamp: typeof timestamp === 'string' ? timestamp.substring(0, 30) : new Date().toISOString()
     };
 
     // For MVP, we are just outputting this to the server console.

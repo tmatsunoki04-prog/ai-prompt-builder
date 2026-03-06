@@ -67,13 +67,21 @@ Output format
 2. Practical steps
 3. Important considerations`;
 
-    // 4. Return the complete result
+    // 4. Sanitize intent fields to guarantee no raw text leaks
+    const sanitizeIntent = (val) => {
+        if (!val || typeof val !== 'string') return 'unknown';
+        // Only allow a-z, 0-9, hyphen and underscore. Max 50 chars.
+        const cleaned = val.toLowerCase().replace(/[^a-z0-9_-]/g, '').substring(0, 50);
+        return cleaned || 'unknown';
+    };
+
+    // 5. Return the complete result
     // Data is safely returned without being persisted.
     res.json({
         prompt: generatedPrompt,
-        intent_category: aiResponseJson.intent_category || 'other',
-        intent_subtype: aiResponseJson.intent_subtype || 'other',
-        intent_action: aiResponseJson.intent_action || 'other',
+        intent_category: sanitizeIntent(aiResponseJson.intent_category),
+        intent_subtype: sanitizeIntent(aiResponseJson.intent_subtype),
+        intent_action: sanitizeIntent(aiResponseJson.intent_action),
         intent_summary: aiResponseJson.intent_summary,
         missing_information: aiResponseJson.missing_information,
         goal: aiResponseJson.goal,
