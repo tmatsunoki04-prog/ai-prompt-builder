@@ -70,9 +70,9 @@ Output format
     // 4. Sanitize intent fields to guarantee no raw text leaks
     const sanitizeIntent = (val) => {
         if (!val || typeof val !== 'string') return 'unknown';
-        // Only allow a-z, 0-9, hyphen and underscore. Max 50 chars.
+        // HTML/JS comment: lower-case化 → 許可文字以外除去 → 50文字で切り詰め → 空なら unknown
         const cleaned = val.toLowerCase().replace(/[^a-z0-9_-]/g, '').substring(0, 50);
-        return cleaned || 'unknown';
+        return cleaned === '' ? 'unknown' : cleaned;
     };
 
     // 5. Return the complete result

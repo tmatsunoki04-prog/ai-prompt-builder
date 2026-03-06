@@ -55,8 +55,18 @@ Output format
 
         const aiResponseJson = JSON.parse(responseText);
 
+        const sanitizeIntent = (val) => {
+            if (!val || typeof val !== 'string') return 'unknown';
+            const cleaned = val.toLowerCase().replace(/[^a-z0-9_-]/g, '').substring(0, 50);
+            return cleaned === '' ? 'unknown' : cleaned;
+        };
+
+        // Note: We deliberately DO NOT log original_input or answers.
         res.json({
-            generated_prompt: aiResponseJson.generated_prompt
+            generated_prompt: aiResponseJson.generated_prompt,
+            intent_category: sanitizeIntent(req.body.intent_category),
+            intent_subtype: sanitizeIntent(req.body.intent_subtype),
+            intent_action: sanitizeIntent(req.body.intent_action)
         });
     } catch (error) {
         console.error("AI Regeneration Error:", error);

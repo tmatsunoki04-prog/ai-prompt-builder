@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentIntentSubtype = 'unknown';
     let currentIntentAction = 'unknown';
     let currentPromptStr = '';
+    // ブラウザメモリ上の一時保持のみ。localStorage / sessionStorage / cookie / analytics には保存しない
     let currentOriginalInput = '';
 
     // Core function to send tracking events (Fire & Forget)
@@ -140,13 +141,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     original_input: currentOriginalInput,
-                    answers: answers
+                    answers: answers,
+                    intent_category: currentIntentCategory,
+                    intent_subtype: currentIntentSubtype,
+                    intent_action: currentIntentAction
                 })
             });
 
             if (response.ok) {
                 const data = await response.json();
                 currentPromptStr = data.generated_prompt;
+                currentIntentCategory = data.intent_category;
+                currentIntentSubtype = data.intent_subtype;
+                currentIntentAction = data.intent_action;
 
                 // Show result
                 promptOutput.textContent = currentPromptStr;
