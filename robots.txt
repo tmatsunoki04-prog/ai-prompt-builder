@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pitaprompt.com/sitemap.xml
+Sitemap: https://pitaprompt.vercel.app/sitemap.xml

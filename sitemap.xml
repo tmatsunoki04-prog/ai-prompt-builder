@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>https://pitaprompt.com/</loc>
+        <loc>https://pitaprompt.vercel.app/</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/index-ja.html</loc>
+        <loc>https://pitaprompt.vercel.app/index-ja.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/chatgpt-does-not-understand.html</loc>
+        <loc>https://pitaprompt.vercel.app/chatgpt-does-not-understand.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/why-ai-misunderstands-intent.html</loc>
+        <loc>https://pitaprompt.vercel.app/why-ai-misunderstands-intent.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/rough-notes-to-ai-prompts.html</loc>
+        <loc>https://pitaprompt.vercel.app/rough-notes-to-ai-prompts.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/terms.html</loc>
+        <loc>https://pitaprompt.vercel.app/terms.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/terms-ja.html</loc>
+        <loc>https://pitaprompt.vercel.app/terms-ja.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/privacy.html</loc>
+        <loc>https://pitaprompt.vercel.app/privacy.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
     </url>
     <url>
-        <loc>https://pitaprompt.com/privacy-ja.html</loc>
+        <loc>https://pitaprompt.vercel.app/privacy-ja.html</loc>
         <lastmod>2026-03-09</lastmod>
         <changefreq>yearly</changefreq>
         <priority>0.3</priority>
