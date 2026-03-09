@@ -50,13 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentOriginalInput = text;
         generateBtn.disabled = true;
+        const originalBtnText = generateBtn.textContent;
         generateBtn.textContent = 'Generating...';
 
         try {
+            const isJa = window.location.pathname.includes('-ja');
             const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ input: text })
+                body: JSON.stringify({ input: text, language: isJa ? 'ja' : 'en' })
             });
 
             if (response.ok) {
@@ -91,9 +93,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         itemDiv.appendChild(input);
                         missingInfoContainer.appendChild(itemDiv);
                     });
-                    document.getElementById('regenerate-group').classList.remove('hidden');
+
+                    // Show the trigger instead of the full group
+                    const triggerContainer = document.getElementById('refinement-trigger-container');
+                    if (triggerContainer) triggerContainer.classList.remove('hidden');
+                    document.getElementById('regenerate-group').classList.add('hidden');
                 } else {
                     missingInfoContainer.textContent = "No additional information requested.";
+                    const triggerContainer = document.getElementById('refinement-trigger-container');
+                    if (triggerContainer) triggerContainer.classList.add('hidden');
                     document.getElementById('regenerate-group').classList.add('hidden');
                 }
 
@@ -101,6 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('prompt-stage').style.color = 'var(--text-muted)';
                 promptOutput.textContent = currentPromptStr;
                 resultSection.classList.remove('hidden');
+
+                const completionMsg = document.getElementById('completion-message');
+                if (completionMsg) {
+                    completionMsg.textContent = isJa ? '生成が完了しました' : 'Your prompt is ready';
+                    completionMsg.style.display = 'block';
+                }
+
+                setTimeout(() => {
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
 
                 // Track Event
                 logEvent('generate', text.length);
@@ -117,14 +135,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } finally {
             generateBtn.disabled = false;
-            generateBtn.textContent = 'Generate Prompt';
+            generateBtn.textContent = originalBtnText;
         }
     });
+
+    const showRefinementBtn = document.getElementById('show-refinement-btn');
+    if (showRefinementBtn) {
+        showRefinementBtn.addEventListener('click', () => {
+            const triggerContainer = document.getElementById('refinement-trigger-container');
+            const regenerateGroup = document.getElementById('regenerate-group');
+            if (triggerContainer) triggerContainer.classList.add('hidden');
+            if (regenerateGroup) regenerateGroup.classList.remove('hidden');
+        });
+    }
 
     const regenerateBtn = document.getElementById('regenerate-btn');
 
     regenerateBtn.addEventListener('click', async () => {
         regenerateBtn.disabled = true;
+        const originalRegenBtnText = regenerateBtn.textContent;
         regenerateBtn.textContent = 'Generating...';
 
         try {
@@ -136,6 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
+            const isJa = window.location.pathname.includes('-ja');
             const response = await fetch('/api/regenerate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -144,7 +174,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     answers: answers,
                     intent_category: currentIntentCategory,
                     intent_subtype: currentIntentSubtype,
-                    intent_action: currentIntentAction
+                    intent_action: currentIntentAction,
+                    language: isJa ? 'ja' : 'en'
                 })
             });
 
@@ -156,9 +187,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentIntentAction = data.intent_action;
 
                 // Show result
+                const completionMsg = document.getElementById('completion-message');
+                if (completionMsg) {
+                    completionMsg.textContent = isJa ? '生成が完了しました' : 'Your prompt is ready';
+                    completionMsg.style.display = 'block';
+                }
+
                 promptOutput.textContent = currentPromptStr;
                 document.getElementById('prompt-stage').textContent = '(Final)';
                 document.getElementById('prompt-stage').style.color = 'var(--success-color)';
+
+                setTimeout(() => {
+                    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 50);
 
                 // Track Event
                 logEvent('regenerate', 0);
@@ -175,7 +216,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } finally {
             regenerateBtn.disabled = false;
-            regenerateBtn.textContent = 'Regenerate Prompt';
+            regenerateBtn.textContent = originalRegenBtnText;
         }
     });
 
@@ -203,8 +244,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle Share
     shareBtn.addEventListener('click', () => {
         // App URL would be dynamically resolved in prod, assuming window.location
-        const appUrl = encodeURIComponent(window.location.origin);
-        const text = encodeURIComponent('Generated an AI prompt using this tool');
+        const isJa = window.location.pathname.includes('-ja');
+        const appUrl = encodeURIComponent(window.location.href);
+        const shareMessage = isJa ? 'PitaPromptでプロンプトを生成しました' : 'Generated an AI prompt using PitaPrompt';
+        const text = encodeURIComponent(shareMessage);
         const xShareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${appUrl}`;
 
         window.open(xShareUrl, '_blank', 'noopener,noreferrer');

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PitaPrompt | Transform Rough Notes into Perfect AI Instructions</title>
-    <meta name="description" content="AI just doesn't get what you're trying to say? PitaPrompt fixes that. Drop your rough ideas into our tool, and we'll format them into clear instructions that AI perfectly understands. Free to use, no sign up required.">
-    <link rel="canonical" href="https://pitaprompt.com/">
+    <title>PitaPrompt (ピタプロン) | 雑なメモをAIに伝わる指示へ変換</title>
+    <meta name="description" content="「何度やってもChatGPTに伝わらない…」そんなイライラはもう終わり。頭の中にある雑なメモをそのまま投げ込むだけで、AIが確実に理解できる形へ自動で整えます。登録不要、今すぐ無料で使えます。">
+    <link rel="canonical" href="https://pitaprompt.com/index-ja.html">
     <link rel="stylesheet" href="styles.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,26 +21,26 @@
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "How to ask AI better questions?",
+      "name": "AIにより良い質問をするには",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Start with a clear role, define your goal specifically, add constraints like word count or format, and specify the final output format. Our tool handles this structure for you automatically."
+        "text": "明確な役割から始め、目的を具体的に定義し、文字数やフォーマットなどの制約を追加して、最終的な出力形式を指定します。PitaPromptは、その構造を自動的に処理します。"
       }
     },
     {
       "@type": "Question",
-      "name": "What is a prompt?",
+      "name": "プロンプトとは何ですか",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A prompt is the instruction or question you give to an Artificial Intelligence system. It guides the AI to understand what you need and how to respond."
+        "text": "プロンプトとは、AIシステムに与える指示や質問のことです。AIがあなたの必要なものと、どのように応答すべきかを理解するためのガイドとなります。"
       }
     },
     {
       "@type": "Question",
-      "name": "Why are AI answers sometimes unhelpful?",
+      "name": "AIの回答が良くない時があるのはなぜですか",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "AI models lack mind-reading abilities. If a prompt is too brief or ambiguous, the AI guesses your intent, which often leads to generic or incorrect answers."
+        "text": "AIモデルには心を読む能力はありません。プロンプトが短すぎたり曖昧だったりすると、AIはあなたの意図を推測し、結果として一般的であったり不正確な回答になりがちです。"
       }
     }
   ]
@@ -52,13 +52,13 @@
 
     <header class="header">
         <div class="lang-switch">
-            <a href="index-ja.html">日本語</a>
+            <a href="index.html">English</a>
         </div>
         
         <div class="hero-content">
-            <p class="hero-pain">"AI just doesn't get what I'm trying to say..."</p>
+            <p class="hero-pain">「AIに、思った通り伝わらない…」</p>
             <h1 class="hero-title">PitaPrompt</h1>
-            <p class="hero-solution">We close that gap by transforming your intent into words AI instantly understands.<br>Just drop in your rough ideas, and we'll handle the rest.</p>
+            <p class="hero-solution">そのズレをなくし、AIがスッと動いてくれる言葉に変換します。<br>頭の中にある雑なメモを、そのまま投げ込んでください。</p>
         </div>
     </header>
 
@@ -67,18 +67,18 @@
         <!-- Input Section -->
         <section class="input-section">
             <div class="input-header-minimal">
-                <span class="editor-label-minimal">Tell us what you need—just as it comes to mind</span>
+                <span class="editor-label-minimal">やってほしいことを、そのまま書いてみましょう</span>
             </div>
-            <label for="prompt-input" class="sr-only">What do you want to ask the AI?</label>
-            <textarea id="prompt-input" placeholder='Example: "Give me startup ideas"' rows="4"></textarea>
+            <label for="prompt-input" class="sr-only">AIに相談したい内容を書いてください</label>
+            <textarea id="prompt-input" placeholder="例: スタートアップのアイデアをください" rows="4"></textarea>
             
             <div class="button-group">
                 <button id="generate-btn" class="primary-btn">
-                    Make AI understand perfectly
+                    AIにピタッと伝わる形にする
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </button>
             </div>
-            <p class="privacy-note">Your input is never saved. <a href="privacy.html">Privacy Policy</a></p>
+            <p class="privacy-note">入力内容は保存されません。<a href="privacy-ja.html">プライバシーポリシー</a></p>
         </section>
 
         <!-- Result Section (Hidden initially) -->
@@ -94,11 +94,11 @@
                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                             </svg>
-                            Ready
+                            完了
                         </span>
                         <span id="prompt-stage" style="font-size: 0.8rem; color: var(--text-muted);"></span>
                     </div>
-                    <h2 class="unified-title">Here is your prompt</h2>
+                    <h2 class="unified-title">プロンプトが利用可能です</h2>
                     <p id="intent-summary-output" class="unified-desc"></p>
                 </div>
 
@@ -113,16 +113,16 @@
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                            <path d="M5 15H4a2 0 0 1-2-2V4a2 0 0 1 2-2h9a2 0 0 1 2 2v1"></path>
                         </svg>
-                        Copy
+                        コピー
                     </button>
                     <button id="share-btn" class="social-btn">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
                             <path
                                 d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                         </svg>
-                        Share
+                        共有
                     </button>
                 </div>
 
@@ -135,7 +135,7 @@
                             <polyline points="12 16 16 12 12 8"></polyline>
                             <line x1="8" y1="12" x2="16" y2="12"></line>
                         </svg>
-                        Make it even more precise (Optional)
+                        さらに精度を上げる（任意）
                     </button>
                 </div>
 
@@ -148,19 +148,18 @@
                                 points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                             </polygon>
                         </svg>
-                        Precision Tuning
+                        プロンプトのカスタマイズ
                     </h4>
                     <p class="refinement-desc">
-                        Provide any of the details below to tailor the prompt. <strong
-                            style="color: var(--text-color);">You don't need to fill out all of them!</strong> Even one
-                        detail helps.
+                        以下の情報に答えることで、あなたの意図により完璧にフィットします。<strong
+                            style="color: var(--text-color);">すべて埋める必要は全くありません！</strong> 分かる範囲だけでOKです。
                     </p>
 
                     <div id="missing-info-output" class="missing-info-container"></div>
 
                     <div class="regenerate-btn-wrapper">
                         <button id="regenerate-btn" class="primary-btn upgrade-btn">
-                            Update with new info
+                            情報を追加して再生成する
                         </button>
                     </div>
                 </div>
@@ -170,36 +169,38 @@
 
         <!-- FAQ Section for SEO -->
         <section class="faq-section">
-            <h2>Frequently Asked Questions</h2>
+            <h2>よくある質問</h2>
 
             <div class="faq-item">
-                <h3>How to ask AI better questions</h3>
-                <p>Start with a clear role (e.g., "Act as an expert consultant"), define your goal specifically, add
-                    constraints like word count or format, and specify the final output format. Our tool handles this
-                    structure for you automatically.</p>
+                <h3>AIにより良い質問をするには</h3>
+                <p>明確な役割（例：「専門のコンサルタントとして」）から始め、目的を具体的に定義し、文字数やフォーマットなどの制約を追加して、最終的な出力形式を指定します。このツールは、その構造を自動的に処理します。
+                </p>
             </div>
 
             <div class="faq-item">
-                <h3>What is a prompt</h3>
-                <p>A prompt is the instruction or question you give to an Artificial Intelligence system. It guides the
-                    AI to understand what you need and how to respond.</p>
+                <h3>プロンプトとは何ですか</h3>
+                <p>プロンプトとは、AIシステムに与える指示や質問のことです。AIがあなたの必要なものと、どのように応答すべきかを理解するためのガイドとなります。</p>
             </div>
 
             <div class="faq-item">
-                <h3>Why AI answers are sometimes bad</h3>
-                <p>AI models lack mind-reading abilities. If a prompt is too brief or ambiguous, the AI guesses your
-                    intent, which often leads to generic or incorrect answers.</p>
+                <h3>AIの回答が良くない時があるのはなぜですか</h3>
+                <p>AIモデルには心を読む能力はありません。プロンプトが短すぎたり曖昧だったりすると、AIはあなたの意図を推測し、結果として一般的であったり不正確な回答になりがちです。</p>
             </div>
         </section>
 
     </main>
 
     <footer class="footer">
-        <div class="footer-links">
-            <a href="terms.html">Terms</a>
-            <a href="privacy.html">Privacy</a>
+        <div class="footer-links" style="justify-content: center; margin-bottom: 1.5rem; gap: 1.5rem; flex-wrap: wrap;">
+            <a href="chatgpt-does-not-understand.html">ChatGPTに伝わらない時の対処法</a>
+            <a href="why-ai-misunderstands-intent.html">AIがくみ取らない理由</a>
+            <a href="rough-notes-to-ai-prompts.html">雑なメモをAIに伝える方法</a>
         </div>
-        <p>This tool is open-source and respects your privacy. We log basic anonymized stats to improve the service.</p>
+        <div class="footer-links">
+            <a href="terms-ja.html">利用規約</a>
+            <a href="privacy-ja.html">プライバシー</a>
+        </div>
+        <p>このツールはオープンソースであり、プライバシーを尊重しています。サービス向上のため、匿名の基本的な統計情報のみを記録します。</p>
     </footer>
 
     <script src="app.js"></script>

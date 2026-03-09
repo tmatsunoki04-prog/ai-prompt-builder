@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPTに思い通り動いてもらう対処法 | PitaPrompt</title>
+    <meta name="description" content="「何度やり直してもChatGPTに意図が伝わらない…」そんな時の原因と対処法を解説。難しい知識がなくても、PitaPromptを使えばAIを思い通りに動かせるようになります。">
+    <link rel="canonical" href="https://pitaprompt.com/chatgpt-does-not-understand.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { padding-top: 2rem; padding-bottom: 4rem; }
+        .article-container { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 1.5rem; }
+        .header-brand { font-size: 1.25rem; font-weight: 800; text-decoration: none; color: var(--border-color); display: inline-block; margin-bottom: 2.5rem; padding: 0.5rem 1rem; border: 2px solid var(--border-color); border-radius: 40px; }
+        .header-brand:hover { background-color: var(--border-color); color: #ffffff; }
+        .article-hero { margin-bottom: 3rem; }
+        .article-hero h1 { font-size: 2rem; font-weight: 800; color: var(--text-color); margin-bottom: 1rem; line-height: 1.4; letter-spacing: -0.03em; }
+        .article-content { font-size: 1.05rem; line-height: 1.8; color: var(--text-color); }
+        .article-content h2 { font-size: 1.35rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-light); letter-spacing: -0.02em; }
+        .article-content h3 { font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--border-color); }
+        .article-content p { margin-bottom: 1.5rem; }
+        .bad-example { background: #fee2e2; border: 2px solid #ef4444; padding: 1.25rem; border-radius: var(--border-radius); margin-bottom: 1.5rem; }
+        .good-example { background: #ecfdf5; border: 2px solid var(--success-color); padding: 1.25rem; border-radius: var(--border-radius); margin-bottom: 1.5rem; }
+        .cta-section { margin-top: 4rem; padding: 2.5rem; background: var(--card-bg); border: 2px solid var(--border-color); border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(41, 37, 36, 0.06); text-align: center; }
+        .cta-section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 1rem; border: none; padding-bottom: 0; }
+        .cta-section p { margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem; }
+        .footer { margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+        .small-cta { background: #fafaf9; border: 2px solid var(--border-light); padding: 1.25rem; border-radius: var(--border-radius); margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+        .small-cta p { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-color); line-height: 1.5; }
+        .small-btn { padding: 0.6rem 1.2rem; font-size: 0.9rem; white-space: nowrap; }
+        @media (max-width: 600px) {
+            .article-hero h1 { font-size: 1.6rem; }
+            .cta-section { padding: 1.5rem; }
+            .small-cta { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .small-btn { width: 100%; justify-content: center; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "本当に適当な言葉でも大丈夫ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。文法が間違っていても、箇条書きのメモのままでも、AIが文脈を整理して伝わりやすい形に整えます。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "ChatGPT以外のAIでも使えますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。生成される依頼文は、ClaudeやGeminiなど、様々なAIが理解しやすい汎用的な形式になっています。"
+      }
+    }
+  ]
+}
+    </script>
+</head>
+<body class="bg-color">
+    <div class="article-container">
+        <header>
+            <a href="index-ja.html" class="header-brand">PitaPrompt</a>
+        </header>
+
+        <article>
+            <div class="article-hero">
+                <h1>ChatGPTにうまく伝わらない時の対処法</h1>
+            </div>
+
+            <div class="article-content">
+                <h2>1. 「何度やり直しても、意図が伝わらない…」</h2>
+                <p>ChatGPTを使っていて、「そうじゃないんだけどな…」「もっとこういう事が聞きたいのに」とストレスを感じた経験はありませんか？<br>人間に話しかけるように依頼しても、AIは背景や文脈をくみ取ってはくれません。この「人間とAIの言葉の受け取り方のズレ」が、うまく伝わらない根本的な原因です。</p>
+
+                <div class="small-cta">
+                    <p>うまく言葉にできない時は、ツールに頼るのも手です👇<br><span style="font-weight: 400; font-size: 0.85rem; color: var(--text-muted);">※面倒な登録不要ですぐ使えます</span></p>
+                    <a href="index-ja.html" style="text-decoration: none;">
+                        <button class="primary-btn small-btn">そのまま入力して整える</button>
+                    </a>
+                </div>
+
+                <h2>2. やりがちな「伝わらない」頼み方</h2>
+                <p>最も多いのは、主語や目的が抜けているケースです。</p>
+                <div class="bad-example">
+                    <strong>【伝わらない例】</strong><br>
+                    「新しい企画のアイデアをいくつか出して」
+                </div>
+                <p>これだとAIは、「誰に向けて？」「どんな形式で？」「何を目的に？」が把握できず、当たり障りのない回答しか返せません。</p>
+
+                <h2>3. ChatGPTがスッと動いてくれる書き方</h2>
+                <p>AIに意図を伝えるのに、専門的な言葉は必要ありません。「自分が何者か（前提）」「何のために使うか（目的）」を少しだけ補足するだけで、出力は劇的に改善します。</p>
+                <div class="good-example">
+                    <strong>【伝わりやすい例】</strong><br>
+                    「私はITツールを販売する営業担当です。<br>業務効率化に悩む中小企業向けに、新しい改善提案の企画アイデアを3つ出してください。」
+                </div>
+                <p>このように情報を足すだけで、AIは見違えるほど意図に沿った回答を出してくれます。</p>
+
+                <h2>4. 毎回考えるのが疲れる…という方へ</h2>
+                <p>とはいえ、毎回このルールを意識して入力するのは面倒ですよね。「もっと気軽に頼みたい」「うまく頭の中をまとめられない」という時こそ、思考の翻訳ツール「PitaPrompt（ピタプロン）」の出番です。</p>
+            </div>
+
+            <div class="cta-section">
+                <h2>AIへの頼み方で消耗するのは終わりにしませんか？</h2>
+                <p>「こうしてほしい」という頭の中の雑なメモをそのまま投げ込むだけで、AIが一番理解できる「伝わる形」へ自動で整えます。毎回書き方を考える必要はありません。</p>
+                <a href="index-ja.html" style="text-decoration: none;">
+                    <button class="primary-btn" style="width: 100%;">
+                        AIにピタッと伝わる形にする
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </a>
+            </div>
+            
+            <div class="faq-section">
+                <h2>よくある質問</h2>
+                <div class="faq-item">
+                    <h3>Q. 本当に適当な言葉でも大丈夫ですか？</h3>
+                    <p>はい。文法が間違っていても、箇条書きのメモのままでも、AIが文脈を整理して伝わりやすい形に整えます。</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Q. ChatGPT以外のAIでも使えますか？</h3>
+                    <p>はい。生成される依頼文は、ClaudeやGeminiなど、様々なAIが理解しやすい汎用的な形式になっています。</p>
+                </div>
+            </div>
+        </article>
+        
+        <footer class="footer">
+            <p>&copy; 2026 PitaPrompt.</p>
+        </footer>
+    </div>
+</body>
+</html>

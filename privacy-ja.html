@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プライバシーポリシー - PitaPrompt</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .static-page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        .static-page h1 {
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .static-page h2 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .static-page p,
+        .static-page ul {
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+        }
+
+        .static-page ul {
+            padding-left: 2rem;
+        }
+
+        .static-page a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <h1><a href="index-ja.html" style="color: inherit; text-decoration: none;">PitaPrompt</a></h1>
+    </header>
+
+    <main class="main-container" style="max-width: 800px;">
+        <div class="static-page">
+            <h1>プライバシーポリシー</h1>
+            <p>最終更新日: 2026年3月6日</p>
+
+            <h2>1. 収集しない情報</h2>
+            <ul>
+                <li><strong>入力データの非保存:</strong> ユーザーの生の入力データ、不足情報の回答、および生成されたプロンプトがデータベースや解析ログに保存されることはありません。</li>
+                <li><strong>ブラウザメモリ:</strong>
+                    再生成機能を実現するため、セッション中に一時的にブラウザメモリに入力が保持される場合がありますが、これをデータベースや解析ログに永続化することはありません。</li>
+                <li><strong>アカウント無し:</strong> このツールは完全に匿名で動作します。ユーザーアカウントやログインシステムは存在しません。</li>
+            </ul>
+
+            <h2>2. 収集する情報（匿名の統計データ）</h2>
+            <p>当社は、機能の利用回数や、一般的なトピック分類などのAIが生成した意図（インテント）のカテゴリなど、必要最小限の匿名解析データを収集します。生の入力データ、生成されたプロンプト、個人情報を保存することはありません。
+            </p>
+            <p>ツールの利用状況を把握し改善するために収集される情報は完全に匿名であり、個人を特定できるものではありません：</p>
+            <ul>
+                <li><strong>イベントの種類:</strong> アクションが発生した際（「generate」「copy」「share」「regenerate」など）に記録します。</li>
+                <li><strong>抽象的な意図（インテント）:</strong> 利用目的を抽象的なカテゴリ識別子として分類します（例: intent_category: "business",
+                    intent_subtype: "finance", intent_action: "write_report"）。</li>
+                <li><strong>入力の文字数バケット:</strong> パフォーマンス最適化のため、リクエストの大まかな規模（「small」「medium」「large」など）を記録します。</li>
+                <li><strong>タイムスタンプ:</strong> イベントの発生日時を記録します。</li>
+            </ul>
+
+            <h2>3. サードパーティ・サービス</h2>
+            <p>上記の匿名データを処理するために、基本的なホスティングや解析基盤を利用する場合があります。ユーザーの入力は、プロンプトの生成・再生成のみを目的として Google Gemini
+                に送信されます。これらの事業者は厳格なデータ処理契約によって制約されており、APIから入力されたデータをモデルトレーニングに使用することはありません。</p>
+
+            <h2>4. 本ポリシーの変更</h2>
+            <p>当社は、本プライバシーポリシーを随時更新する場合があります。更新があった場合は、このページに新しいプライバシーポリシーを掲載することでお知らせします。</p>
+        </div>
+    </main>
+</body>
+
+</html>

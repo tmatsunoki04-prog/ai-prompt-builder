@@ -7,7 +7,7 @@
         {
             "@type": "HowToStep",
             "name": "Enter your idea",
-            "text": "Type your vague idea into the AI Prompt Builder input box (e.g. 'Give me startup ideas')."
+            "text": "Type your vague idea into the PitaPrompt input box (e.g. 'Give me startup ideas')."
         },
         {
             "@type": "HowToStep",

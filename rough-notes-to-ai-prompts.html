@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>頭の中の雑なメモを、AIに伝わる形にする方法 | PitaPrompt</title>
+    <meta name="description" content="アイデアや雑な箇条書きメモを、AIがそのまま作業できる「伝わる形」に整える方法をご紹介します。ツールに丸投げして、面倒な文章化を終わらせましょう。">
+    <link rel="canonical" href="https://pitaprompt.com/rough-notes-to-ai-prompts.html">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { padding-top: 2rem; padding-bottom: 4rem; }
+        .article-container { width: 100%; max-width: 640px; margin: 0 auto; padding: 0 1.5rem; }
+        .header-brand { font-size: 1.25rem; font-weight: 800; text-decoration: none; color: var(--border-color); display: inline-block; margin-bottom: 2.5rem; padding: 0.5rem 1rem; border: 2px solid var(--border-color); border-radius: 40px; }
+        .header-brand:hover { background-color: var(--border-color); color: #ffffff; }
+        .article-hero { margin-bottom: 3rem; }
+        .article-hero h1 { font-size: 2rem; font-weight: 800; color: var(--text-color); margin-bottom: 1rem; line-height: 1.4; letter-spacing: -0.03em; }
+        .article-content { font-size: 1.05rem; line-height: 1.8; color: var(--text-color); }
+        .article-content h2 { font-size: 1.35rem; font-weight: 800; margin-top: 2.5rem; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border-light); letter-spacing: -0.02em; }
+        .article-content h3 { font-size: 1.15rem; font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; color: var(--border-color); }
+        .article-content p { margin-bottom: 1.5rem; }
+        .bad-example { background: #fee2e2; border: 2px solid #ef4444; padding: 1.25rem; border-radius: var(--border-radius); margin-bottom: 1.5rem; }
+        .good-example { background: #ecfdf5; border: 2px solid var(--success-color); padding: 1.25rem; border-radius: var(--border-radius); margin-bottom: 1.5rem; }
+        .cta-section { margin-top: 4rem; padding: 2.5rem; background: var(--card-bg); border: 2px solid var(--border-color); border-radius: var(--border-radius); box-shadow: 0 4px 16px rgba(41, 37, 36, 0.06); text-align: center; }
+        .cta-section h2 { font-size: 1.35rem; font-weight: 800; margin-bottom: 1rem; border: none; padding-bottom: 0; }
+        .cta-section p { margin-bottom: 2rem; color: var(--text-muted); font-size: 0.95rem; }
+        .footer { margin-top: 4rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+        @media (max-width: 600px) {
+            .article-hero h1 { font-size: 1.6rem; }
+            .cta-section { padding: 1.5rem; }
+        }
+    </style>
+
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "本当に単語の羅列だけでもいいんですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。文の繋がりがなくても大丈夫です。関連性の薄い単語ばかりの場合は、足りない要素についてAIから質問形式で補足をお願いすることがあります。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "アプリのインストールは必要ですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "いいえ、Webブラウザ上で動くため、スマホからでもPCからでもその場ですぐに使えます。"
+      }
+    }
+  ]
+}
+    </script>
+</head>
+<body class="bg-color">
+    <div class="article-container">
+        <header>
+            <a href="index-ja.html" class="header-brand">PitaPrompt</a>
+        </header>
+
+        <article>
+            <div class="article-hero">
+                <h1>頭の中の雑なメモを、AIに伝わる形にする方法</h1>
+            </div>
+
+            <div class="article-content">
+                <h2>1. 「長い文章にしてAIに頼むのが面倒…」</h2>
+                <p>アイデアの種やキーワードは頭にあるけれど、それを丁寧な文章に書き直してAIに伝える労力がもったいない。そう感じて、単語の羅列だけでAIに質問を投げていませんか？</p>
+
+                <h2>2. メモのままだと失敗しやすい理由</h2>
+                <div class="bad-example">
+                    <strong>【伝わりにくい例】</strong><br>
+                    ・新規事業<br>
+                    ・AI活用<br>
+                    ・若手向け<br>
+                    ・面白い企画出して
+                </div>
+                <p>このように単なる箇条書きだけで投げると、AIは「これらのキーワードを含むだけの一般的な文章」を出力しがちです。あなたが期待していたようなユニークなアイデアにはなりにくいのが実情です。</p>
+
+                <h2>3. メモからAIが動ける形を作るには</h2>
+                <p>雑なメモを活かすには、それらの単語が「誰に向けての言葉か」「何をするためのキーワードか」を、AIがわかるように整理してあげる必要があります。しかし、毎回手作業でこれを考えるのは手間がかかります。</p>
+
+                <h2>4. そのまま投げ込むだけで、AIに伝わる形に整う</h2>
+                <p>PitaPromptは、この「雑な入力の整理」を得意としています。<br>先ほどの箇条書きをそのままPitaPromptに入力するだけで、AI自身が理解しやすいフォーマットへと自然に整えてくれます。</p>
+            </div>
+
+            <div class="cta-section">
+                <h2>整える作業はすべて、ツールに任せましょう</h2>
+                <p>あなたは思いついたキーワードやメモのまま入力するだけ。PitaPromptがそれを、すんなりと伝わる形へ構築します。まずは手元の雑なメモを貼り付けてみてください。</p>
+                <a href="index-ja.html" style="text-decoration: none;">
+                    <button class="primary-btn" style="width: 100%;">
+                        AIにピタッと伝わる形にする
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </button>
+                </a>
+            </div>
+            
+            <div class="faq-section">
+                <h2>よくある質問</h2>
+                <div class="faq-item">
+                    <h3>Q. 本当に単語の羅列だけでもいいんですか？</h3>
+                    <p>はい。文の繋がりがなくても大丈夫です。関連性の薄い単語ばかりの場合は、足りない要素についてAIから質問形式で補足をお願いすることがあります。</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Q. アプリのインストールは必要ですか？</h3>
+                    <p>いいえ、Webブラウザ上で動くため、スマホからでもPCからでもその場ですぐに使えます。</p>
+                </div>
+            </div>
+        </article>
+        
+        <footer class="footer">
+            <p>&copy; 2026 PitaPrompt.</p>
+        </footer>
+    </div>
+</body>
+</html>
