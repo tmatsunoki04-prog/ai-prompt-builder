@@ -570,7 +570,64 @@ pre {
 }
 
 @media (max-width: 600px) {
+    body {
+        padding: 1.25rem 0.75rem;
+    }
+    .main-container {
+        gap: 1.5rem;
+    }
+    .hero-pain {
+        font-size: 1rem;
+        padding: 0.6rem 1rem;
+    }
+    .hero-title {
+        font-size: 1.75rem;
+    }
+    .hero-title svg {
+        width: 24px;
+        height: 24px;
+    }
+    .hero-solution {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+    }
+    .input-section {
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+    .unified-card {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
     .action-buttons {
         flex-direction: column;
+        width: 100%;
+        gap: 0.6rem;
+    }
+    .action-buttons button {
+        width: 100%;
+    }
+    .primary-btn {
+        width: 100%;
+        padding: 0.85rem;
+        font-size: 1rem;
+    }
+    .missing-info-item {
+        padding: 1rem;
+    }
+    .faq-section {
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+    }
+    .faq-section h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+    }
+    .faq-item {
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+    .related-articles-section, .related-articles-box {
+        padding: 1.25rem !important;
     }
 }
