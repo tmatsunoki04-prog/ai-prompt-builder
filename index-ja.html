@@ -7,6 +7,8 @@
     <title>PitaPrompt (ピタプロン) | 雑なメモをAIに伝わる指示へ変換</title>
     <meta name="description" content="「何度やってもChatGPTに伝わらない…」そんなイライラはもう終わり。頭の中にある雑なメモをそのまま投げ込むだけで、AIが確実に理解できる形へ自動で整えます。登録不要、今すぐ無料で使えます。">
     <link rel="canonical" href="https://pitaprompt.vercel.app/index-ja.html">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
     <link rel="stylesheet" href="styles.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,6 +70,15 @@
   "description": "「何度やってもChatGPTに伝わらない…」そんなイライラはもう終わり。頭の中にある雑なメモをそのまま投げ込むだけで、AIが確実に理解できる形へ自動で整えます。登録不要、今すぐ無料で使えます。"
 }
     </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S36197SB40"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S36197SB40');
+    </script>
 </head>
 
 <body>
@@ -79,7 +90,10 @@
         
         <div class="hero-content">
             <p class="hero-pain">「AIに、思った通り伝わらない…」</p>
-            <h1 class="hero-title">PitaPrompt</h1>
+            <h1 class="hero-title" style="display:inline-flex; align-items:center; gap:8px; justify-content:center;">
+            <img src="/logo.png" alt="PitaPrompt logo" style="width:32px; height:32px; display:block;">
+            <span>PitaPrompt</span>
+        </h1>
             <p class="hero-solution">そのズレをなくし、AIがスッと動いてくれる言葉に変換します。<br>頭の中にある雑なメモを、そのまま投げ込んでください。</p>
         </div>
     </header>

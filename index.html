@@ -7,6 +7,8 @@
     <title>PitaPrompt | Transform Rough Notes into Perfect AI Instructions</title>
     <meta name="description" content="AI just doesn't get what you're trying to say? PitaPrompt fixes that. Drop your rough ideas into our tool, and we'll format them into clear instructions that AI perfectly understands. Free to use, no sign up required.">
     <link rel="canonical" href="https://pitaprompt.vercel.app/">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
     <link rel="stylesheet" href="styles.css">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -68,6 +70,15 @@
   "description": "AI just doesn't get what you're trying to say? PitaPrompt fixes that. Drop your rough ideas into our tool, and we'll format them into clear instructions that AI perfectly understands. Free to use, no sign up required."
 }
     </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S36197SB40"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-S36197SB40');
+    </script>
 </head>
 
 <body>
@@ -79,7 +90,10 @@
         
         <div class="hero-content">
             <p class="hero-pain">"AI just doesn't get what I'm trying to say..."</p>
-            <h1 class="hero-title">PitaPrompt</h1>
+            <h1 class="hero-title" style="display:inline-flex; align-items:center; gap:8px; justify-content:center;">
+            <img src="/logo.png" alt="PitaPrompt logo" style="width:32px; height:32px; display:block;">
+            <span>PitaPrompt</span>
+        </h1>
             <p class="hero-solution">We close that gap by transforming your intent into words AI instantly understands.<br>Just drop in your rough ideas, and we'll handle the rest.</p>
         </div>
     </header>
