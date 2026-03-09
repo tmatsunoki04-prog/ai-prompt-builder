@@ -115,6 +115,7 @@ body {
     color: var(--text-color);
     letter-spacing: -0.04em;
     margin-top: 0.5rem;
+    line-height: 1;
 }
 
 .hero-solution {
@@ -124,6 +125,7 @@ body {
     font-weight: 500;
     max-width: 450px;
     margin: 0 auto;
+    word-break: auto-phrase;
 }
 
 @media (max-width: 600px) {
