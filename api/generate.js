@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
         // Using flash for low latency/cost
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" });
 
         const systemInstruction = `You are a structural AI assistant that converts vague user inputs into structured fields.
 Output MUST be valid raw JSON only, without markdown formatting.

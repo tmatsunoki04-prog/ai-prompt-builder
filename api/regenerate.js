@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
     try {
         const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" });
 
         const systemInstruction = `You are a structural AI assistant that creates highly effective AI prompts.
 The user has provided their original goal, along with answers to clarifying questions.
