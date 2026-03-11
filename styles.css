@@ -267,9 +267,15 @@ button {
     text-underline-offset: 2px;
 }
 
-/* Utility Classes */
 .hidden {
     display: none !important;
+}
+
+.sp-br {
+    display: none;
+}
+.pc-br {
+    display: block;
 }
 
 /* Unified Result Card UX */
@@ -592,6 +598,13 @@ pre {
     .hero-solution {
         font-size: 0.95rem;
         padding: 0 0.5rem;
+        line-height: 1.8;
+    }
+    .sp-br {
+        display: block;
+    }
+    .pc-br {
+        display: none;
     }
     .input-section {
         padding: 1.25rem;
